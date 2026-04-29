@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <title>The 5 most beautiful sites I have visited</title>
+    <link rel="stylesheet" type="text/css" href="style.css" />
+  </head>
+
+  <body>
+    <h1 align="center">The 5 most beautiful sites I have visited</h1>
+    <hr />
+
+    <table border="1" align="center" width="70%" cellpadding="10">
+      <tr align="center" bgcolor="lightgray">
+        <td><a href="paris.html">Paris</a></td>
+        <td><a href="rome.html">Rome</a></td>
+        <td><a href="bolivia.html">Bolivia</a></td>
+        <td><a href="mongolia.html">Mongolia</a></td>
+        <td><a href="switzerland.html">Switzerland</a></td>
+      </tr>
+    </table>
+
+    <br /><br />
+
+    <h2 align="center">Click on the map</h2>
+
+    <center>
+      <img
+        src="images/map.png"
+        usemap="#worldmap"
+        width="800"
+        height="500"
+        alt="World map"
+      />
+    </center>
+
+    <map name="worldmap">
+      <area shape="rect" coords="360,180,390,210" href="paris.html" />
+      <area shape="rect" coords="395,205,430,235" href="rome.html" />
+      <area shape="rect" coords="215,340,250,380" href="bolivia.html" />
+      <area shape="rect" coords="570,180,650,230" href="mongolia.html" />
+      <area shape="rect" coords="380,190,400,200" href="switzerland.html" />
+    </map>
+  </body>
+</html>
