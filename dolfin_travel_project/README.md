@@ -10,4 +10,4 @@ It includes:
 - Images and table-based layout
 
 Website link:
-https://dolfinvarshev.github.io/Afeka-Varshev-Dolfin/
+https://dolfinvarshev.github.io/Afeka-Varshev-Dolfin/dolfin_travel_project
