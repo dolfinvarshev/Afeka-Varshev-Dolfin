@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CNN Shape Classifier</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <nav>
+      <h1>CNN Shape Classifier</h1>
+      <a class="nav-link" href="dictionary.html">📖 AI / CNN Dictionary</a>
+    </nav>
+
+    <div class="page-wrapper">
+      <!-- Model status -->
+      <div class="card">
+        <h2>Model Status</h2>
+        <div id="model-status">Initializing…</div>
+        <p style="font-size: 12px; color: #666; margin-top: 6px">
+          Model weights are stored in <strong>localStorage</strong>
+        </p>
+      </div>
+
+      <!-- Upload + controls -->
+      <div class="card">
+        <h2>Upload an Image</h2>
+        <div class="upload-row">
+          <div class="upload-controls">
+            <label for="file-input">
+              Draw a triangle, heart, or square in Paint app: <br />
+              fill the shape black, make it cover almost the entire page, and
+              save on a white background for best results:
+            </label>
+            <input
+              type="file"
+              id="file-input"
+              accept="image/*"
+              onchange="onImageChange(this)"
+            />
+            <div class="btn-row">
+              <button class="btn btn-test" onclick="onTest()">▶ Test</button>
+              <button class="btn btn-reset" onclick="onReset()">↺ Reset</button>
+            </div>
+            <div id="result-text"></div>
+          </div>
+          <img id="img-preview" alt="Preview" src="" />
+        </div>
+      </div>
+
+      <!-- CNN Visualization -->
+      <div class="card">
+        <h2>CNN Visualization - Full Network (Input → Output)</h2>
+        <p
+          style="
+            font-size: 13px;
+            color: #444;
+            margin-bottom: 10px;
+            line-height: 1.7;
+          "
+        >
+          The canvas below shows <strong>the actual trained CNN</strong> from
+          input to output.<br />
+          <strong>Conv layers:</strong> each 3×3 filter is drawn as a labeled
+          grid - the number inside every cell is the exact learned filter
+          coefficient (blue&nbsp;=&nbsp;positive, red&nbsp;=&nbsp;negative).<br />
+          <strong>Dense layers:</strong> all connection lines are drawn with
+          their exact weight values (unique per neuron pair).<br />
+          <strong>Feature maps</strong> fill in with real activation values
+          layer by layer when you click Test.
+        </p>
+
+        <!-- Scrolls vertically - each layer has its own full-width band.
+         Scroll down to see all layers from input to output. -->
+        <div class="canvas-container">
+          <canvas id="nn-canvas" width="1440" height="5000"></canvas>
+        </div>
+
+        <canvas id="hidden-canvas"></canvas>
+      </div>
+
+      <!-- How it works -->
+      <div class="card">
+        <h2>How It Works</h2>
+        <ol
+          style="
+            padding-left: 20px;
+            line-height: 2;
+            font-size: 14px;
+            color: #444;
+          "
+        >
+          <li>
+            <strong>Upload any image</strong> - any size is accepted. The
+            browser draws it onto a hidden 8×8 canvas to get 64 grayscale pixel
+            values.
+          </li>
+          <li>
+            <strong
+              >Layer 1 - Conv2D-1 (4 filters, 3×3, same padding, ReLU):</strong
+            >
+            Each filter slides across the 8×8 image computing dot products at
+            every position. The 9 values inside each kernel grid are the learned
+            filter coefficients (shared across all positions). Output: 4 feature
+            maps of 8×8. Total: 36 learned coefficients.
+          </li>
+          <li>
+            <strong>Layer 2 - MaxPool-1 (2×2):</strong> No learned weights -
+            picks the maximum of each 2×2 window, halving spatial size. Output:
+            4 maps of 4×4 = 64 values.
+          </li>
+          <li>
+            <strong
+              >Layer 3 - Conv2D-2 (4 filters, 3×3, 4 input channels, same
+              padding, ReLU):</strong
+            >
+            Each output filter learns a separate 3×3 kernel per input channel →
+            4×9 = 36 coefficients per filter, 144 total. Output: 4 maps of 4×4.
+          </li>
+          <li>
+            <strong>Layer 4 - MaxPool-2 (2×2) + Flatten:</strong> No learned
+            weights. MaxPool halves again → 4 maps of 2×2 =
+            <strong>16 values</strong>. Flatten reshapes [4×2×2] → [16] -
+            identical data, 1D vector format.
+          </li>
+          <li>
+            <strong>Layer 5 - Dense-1 (8 neurons, ReLU):</strong> Each neuron is
+            fully connected to all 16 flattened values. 128 unique learned
+            weights + 8 biases.
+          </li>
+          <li>
+            <strong>Layer 6 - Output (3 neurons, Softmax):</strong> Triangle,
+            Heart, Square. All 24 connections to Dense-1 are drawn with their
+            exact weight values. Softmax converts 3 scores to probabilities
+            summing to 100%.
+          </li>
+          <li>
+            <strong>Result:</strong> The neuron with the highest probability
+            glows gold.
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="page-footer">
+      CNN Shape Classifier - University Project &nbsp;|&nbsp;
+      <a href="dictionary.html">📖 AI / CNN Dictionary →</a>
+    </div>
+
+    <script src="model.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

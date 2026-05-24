@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI / CNN Dictionary</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav>
+  <h1>AI / CNN Dictionary</h1>
+  <a class="nav-link" href="index.html">Back to Classifier</a>
+</nav>
+
+<div class="page-wrapper">
+
+  <div class="card" style="padding:14px 20px;">
+    <div class="dict-search-bar">
+      <label for="dict-search">Search:</label>
+      <input type="text" id="dict-search"
+             placeholder="Type a concept, e.g. ReLU, Convolution..."
+             onkeyup="filterDict()">
+      <span id="dict-count" style="font-size:13px;color:#666;"></span>
+    </div>
+  </div>
+
+  <table class="dict-grid" id="dict-grid" cellspacing="0">
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Artificial Intelligence (AI)</div>
+          <div class="dict-def">The ability of a machine to perform tasks that require human-like intelligence - recognising images, understanding language, making decisions.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Machine Learning (ML)</div>
+          <div class="dict-def">A branch of AI where algorithms learn patterns automatically from data. Instead of explicit rules, the model improves through experience on examples.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Deep Learning</div>
+          <div class="dict-def">A sub-field of machine learning that uses neural networks with many layers. Deep learning achieves state-of-the-art results in image recognition, speech, and text.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Supervised Learning</div>
+          <div class="dict-def">Training where every example has a known label (e.g., "Triangle"). The model learns to map inputs to correct labels by minimising the difference between its predictions and the true labels.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Classification</div>
+          <div class="dict-def">The task of assigning an input to one of several discrete categories (classes). This project classifies images as Triangle, Heart, or Square.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Dataset</div>
+          <div class="dict-def">A collection of labelled examples used to train or evaluate a model. In this project the dataset contains images of triangles, hearts, and squares generated in Google Colab.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Training Set</div>
+          <div class="dict-def">The portion of the dataset used to adjust the model's weights. The model sees these examples during training and updates weights to reduce loss.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Test Set</div>
+          <div class="dict-def">The portion of the dataset withheld during training. It is used only to evaluate how well the final model generalises to unseen data.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Class / Label</div>
+          <div class="dict-def">A category that an example belongs to. In this project the three classes are Triangle, Heart, and Square. Each training image has exactly one label.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Feature</div>
+          <div class="dict-def">A measurable property of the input used by the model. In this CNN, features are not hand-crafted - the convolutional layers automatically learn which pixel patterns (edges, curves, fills) are useful for distinguishing Triangle, Heart, and Square.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">ML Basics</span>
+          <div class="dict-term">Feature Extraction</div>
+          <div class="dict-def">Learning useful representations from raw data. In this project the CNN learns its own features: Conv2D-1 detects basic patterns in the 8x8 image; Conv2D-2 combines them into higher-level features, all automatically through training.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Neural Network</div>
+          <div class="dict-def">A computational model inspired by the brain. Layers of artificial neurons are connected by weighted links. Signals flow from input to output through those connections during the forward pass.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">CNN (Convolutional Neural Network)</div>
+          <div class="dict-def">A neural network designed for images. It uses convolutional layers to detect local features (edges, corners, textures) followed by pooling and dense layers for classification.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Neuron</div>
+          <div class="dict-def">The basic computing unit. A neuron receives inputs, multiplies each by a weight, adds a bias, and applies an activation function: output = activation(sum of wi*xi + b).</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Layer</div>
+          <div class="dict-def">A group of neurons that operate at the same stage of processing. This project has 6 layers: Input (64 neurons), Conv2D-1 (256), MaxPool-1 (64), Conv2D-2 + MaxPool-2 (16), Dense-1 (8), Output (3).</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Input Layer</div>
+          <div class="dict-def">The first layer. It receives the raw data. In this project any uploaded image is resized to 8x8 pixels and normalised to [0,1], giving 64 pixel values that feed into the first convolutional layer.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Hidden Layer</div>
+          <div class="dict-def">One or more intermediate layers between input and output. This project has multiple hidden layers: two Conv2D layers with ReLU that detect shape patterns, two MaxPool layers that compress them, and one Dense layer with 8 neurons and ReLU.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Output Layer</div>
+          <div class="dict-def">The final layer that produces the prediction. Here it has 3 neurons, one per class (Triangle, Heart, Square). Softmax converts their raw scores into probabilities.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Dense Layer (Fully Connected)</div>
+          <div class="dict-def">A layer where every neuron is connected to every neuron in the previous layer. Both the hidden layer and the output layer in this project are dense layers.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Weight</div>
+          <div class="dict-def">A learnable parameter that scales the connection between two neurons. Weights are shown on the connection lines in the canvas visualisation - blue for positive, red for negative.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Neural Network</span>
+          <div class="dict-term">Bias</div>
+          <div class="dict-def">A learnable constant added to the weighted sum before the activation function: z = sum(wi*xi) + b. It shifts the neuron's output up or down independently of the input.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Convolution</div>
+          <div class="dict-def">A mathematical operation where a small filter slides over the image and computes a dot product at each position. The result is a feature map highlighting where a pattern appears.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Filter (Kernel)</div>
+          <div class="dict-def">A small weight matrix (e.g., 3x3) used in a convolutional layer. Each filter learns to detect a specific feature: edges, corners, curves. The output of applying a filter is a feature map.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Feature Map</div>
+          <div class="dict-def">The output produced by applying a filter to the input (or a previous layer). Each element indicates how strongly the filter's pattern was detected at that location.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Pooling</div>
+          <div class="dict-def">A down-sampling operation that reduces the spatial dimensions of a feature map. It makes the network more efficient and less sensitive to small translations of the object.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Max Pooling</div>
+          <div class="dict-def">The most common pooling method. The feature map is divided into non-overlapping windows; only the maximum value in each window is kept, discarding the rest.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Stride</div>
+          <div class="dict-def">How many pixels the filter moves at each step during convolution. A stride of 1 slides one pixel at a time; a stride of 2 halves the output size.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Padding</div>
+          <div class="dict-def">Adding zeros around the border of the input before convolution. "Same" padding keeps the output the same size as the input; "valid" padding does not add zeros.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">CNN</span>
+          <div class="dict-term">Flatten</div>
+          <div class="dict-def">Reshaping a multi-dimensional feature map (e.g., 4x2x2) into a 1D vector (16 values). This is required before connecting convolutional layers to dense layers.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Activation</span>
+          <div class="dict-term">Activation Function</div>
+          <div class="dict-def">A non-linear function applied to a neuron's output. Without activation functions, a multi-layer network would collapse to a single linear transformation. Examples: ReLU, Sigmoid, Softmax.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Activation</span>
+          <div class="dict-term">ReLU (Rectified Linear Unit)</div>
+          <div class="dict-def">The most popular hidden-layer activation: ReLU(x) = max(0, x). Negative values are set to zero; positive values pass through unchanged. Fast and avoids the vanishing gradient problem.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Activation</span>
+          <div class="dict-term">Softmax</div>
+          <div class="dict-def">An output-layer activation that converts raw scores into probabilities summing to 1. The class with the highest probability is the prediction.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Activation</span>
+          <div class="dict-term">Sigmoid</div>
+          <div class="dict-def">An S-shaped activation: output = 1 / (1 + e^-x). Outputs are in (0, 1). Historically popular but prone to vanishing gradients in deep networks. Often replaced by ReLU.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Forward Pass</div>
+          <div class="dict-def">Computing the network's prediction by feeding input through each layer from input to output. The browser canvas in this project animates the forward pass step by step.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Loss (Cost Function)</div>
+          <div class="dict-def">A number measuring how wrong the model's predictions are. During training the goal is to minimise the loss. Common loss for classification: Cross-Entropy Loss.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Backpropagation</div>
+          <div class="dict-def">The algorithm that computes gradients of the loss with respect to every weight using the chain rule. Gradients flow backward from the output layer to the input layer.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Gradient Descent</div>
+          <div class="dict-def">An optimisation algorithm that updates weights by moving in the direction of the steepest loss decrease: w = w - learning_rate * gradient.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Learning Rate</div>
+          <div class="dict-def">A hyper-parameter controlling the size of each weight update step. Too large means unstable training; too small means very slow convergence. This project uses the Adam optimiser with a learning rate of 0.001.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Epoch</div>
+          <div class="dict-def">One complete pass through the entire training dataset. This project trains for up to 200 epochs with early stopping - training halts automatically when validation accuracy stops improving.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Batch / Mini-Batch</div>
+          <div class="dict-def">A subset of training examples processed together before updating weights. Mini-batch gradient descent is a compromise between using the full dataset (stable, slow) and single examples (fast, noisy).</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Accuracy</div>
+          <div class="dict-def">Fraction of predictions that are correct: correct predictions divided by total predictions. Accuracy is reported on the test set after training to give an unbiased performance estimate.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Overfitting</div>
+          <div class="dict-def">When a model memorises the training data, including its noise, and performs poorly on new examples. Signs: very low training loss but high test loss. Prevented by smaller models or regularisation.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Underfitting</div>
+          <div class="dict-def">When a model is too simple to capture the patterns in the data. Both training and test losses remain high. Fixed by using a larger or more complex model.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Training</span>
+          <div class="dict-term">Generalisation</div>
+          <div class="dict-def">The ability of a trained model to perform well on new, unseen data. A model that generalises well has learned the true underlying patterns rather than memorising training examples.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Image</span>
+          <div class="dict-term">Pixel</div>
+          <div class="dict-def">The smallest unit of a digital image. Each pixel stores one colour value (R, G, B). In this project pixels are converted to grayscale: white background = 1.0, dark shape = 0.0. The 8x8 grid gives 64 input values.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Image</span>
+          <div class="dict-term">Grayscale</div>
+          <div class="dict-def">Representing an image with a single brightness channel instead of separate R, G, B channels. In this project: white background = 1.0, dark shape = 0.0. Grayscale reduces data size and suffices for shape classification.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Image</span>
+          <div class="dict-term">Normalisation (Images)</div>
+          <div class="dict-def">Scaling pixel values to a standard range (0 to 1) before feeding them into a model. Helps gradient descent converge faster and prevents one feature from dominating.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Image</span>
+          <div class="dict-term">Data Augmentation</div>
+          <div class="dict-def">Artificially expanding the training set by applying transformations: rotation, flipping, scaling, adding noise. Reduces overfitting and makes the model more robust to variations.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Deployment</span>
+          <div class="dict-term">Model Inference</div>
+          <div class="dict-def">Using a trained model to make predictions on new data as opposed to training. In this project, inference is the forward pass run entirely in the browser using weights stored in localStorage via JSON.stringify and JSON.parse.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Deployment</span>
+          <div class="dict-term">Model Export</div>
+          <div class="dict-def">Saving trained weights so they can be used later or in another environment. The Colab script exports weights rounded to 4 decimal places as a compact JSON object.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Deployment</span>
+          <div class="dict-term">Hyper-parameter</div>
+          <div class="dict-def">A configuration value set before training that is not learned from data. Examples: learning rate, number of layers, number of neurons, number of epochs.</div>
+        </div>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Deployment</span>
+          <div class="dict-term">Parameter</div>
+          <div class="dict-def">A value that the model learns during training, specifically the weights and biases. Parameters are updated by gradient descent to minimise the loss function.</div>
+        </div>
+      </td>
+      <td class="dict-cell">
+        <div class="dict-entry">
+          <span class="dict-category">Deployment</span>
+          <div class="dict-term">Confidence / Probability</div>
+          <div class="dict-def">The softmax output for each class, representing how certain the model is about its prediction. A confidence of 84% for Triangle means the model assigns 84% probability to that class.</div>
+        </div>
+      </td>
+      <td class="dict-cell"></td>
+    </tr>
+
+  </table>
+
+</div>
+
+<div class="page-footer">
+  AI / CNN Dictionary — 53 Concepts &nbsp;|&nbsp;
+  <a href="index.html">Back to Classifier</a>
+</div>
+
+<script>
+  function filterDict() {
+    var q   = document.getElementById("dict-search").value.toLowerCase();
+    var all = document.getElementsByClassName("dict-entry");
+    var n   = 0;
+    for (var i = 0; i < all.length; i++) {
+      var txt  = all[i].innerHTML.toLowerCase();
+      var cell = all[i].parentNode;
+      if (!q || txt.indexOf(q) !== -1) {
+        cell.style.display = "";
+        n++;
+      } else {
+        cell.style.display = "none";
+      }
+    }
+    var rows = document.getElementById("dict-grid").getElementsByTagName("tr");
+    for (var i = 0; i < rows.length; i++) {
+      var cells     = rows[i].getElementsByTagName("td");
+      var allHidden = true;
+      for (var j = 0; j < cells.length; j++) {
+        if (cells[j].style.display !== "none") { allHidden = false; break; }
+      }
+      rows[i].style.display = allHidden ? "none" : "";
+    }
+    document.getElementById("dict-count").innerHTML =
+      q ? ("Showing " + n + " of " + all.length) : (all.length + " concepts");
+  }
+
+  window.onload = function () { filterDict(); };
+</script>
+
+</body>
+</html>
