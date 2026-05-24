@@ -1,4 +1,5 @@
-CNN Shape Classifier
+# CNN Shape Classifier
+
 A CNN-based shape recognition website built as a university project
 
 This project is a website built using HTML, CSS, and JavaScript.
